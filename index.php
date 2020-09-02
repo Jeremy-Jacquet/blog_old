@@ -2,10 +2,15 @@
 
 require 'App/config/Database.php';
 
-try {
+use App\library\BlogFram\SuperGlobals;
 
-    if(isset($_GET['page'])) {
-        $page = htmlspecialchars($_GET['page']);
+$superGlobals = new SuperGlobals;
+$page = null;
+
+try {
+    
+    if(!empty($superGlobals->get_GET['page'])) {
+        $page = htmlspecialchars($superGlobals->get_GET['page']);
     }
 
     if(empty($page)) {
