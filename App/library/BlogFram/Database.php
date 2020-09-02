@@ -14,7 +14,7 @@ abstract class Database
 
     private function setPDO()
     {
-        self::$pdo = new PDO("mysql:host=".self::DB_HOST.";dbname=".self::DB_DB.";charset=utf8", self::DB_USER, self::DB_PSWD);
+        self::$pdo = new PDO("mysql:host=".self::DB_HOST.";dbname=".self::DB_NAME.";charset=utf8", self::DB_USER, self::DB_PSWD);
         self::$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_WARNING);
     }
 
