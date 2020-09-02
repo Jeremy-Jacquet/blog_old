@@ -1,7 +1,5 @@
 <?php
 
-require 'App/config/Database.php';
-
 use App\library\BlogFram\SuperGlobals;
 
 $superGlobals = new SuperGlobals;
