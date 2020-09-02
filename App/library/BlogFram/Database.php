@@ -3,8 +3,6 @@ namespace App\library\BlogFram;
 
 use \PDO;
 
-require('App/config/Database.php');
-
 abstract class Database 
 {
     private static $pdo;
