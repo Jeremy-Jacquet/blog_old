@@ -1,18 +1,14 @@
 <?php
-require '/vendor/autoload.php';
+require '../vendor/autoload.php';
+require "../App/config/config.php";
 
-use App\library\BlogFram\SuperGlobals;
+use App\library\BlogFram\Router;
 
-$superGlobals = new SuperGlobals;
-$page = htmlspecialchars($superGlobals->get_GET['page']);
+$router = new Router;
 
 try {
 
-    if(empty($page)) {
-        //Go to home
-    } else {
-        throw new Exception("La page que vous recherchez n'existe pas.");
-    }
+    $router->run();
 
 } catch(Exception $e) {
     $error = $e->getMessage();
