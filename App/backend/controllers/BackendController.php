@@ -5,7 +5,7 @@ use App\library\BlogFram\Controller;
 
 class BackendController extends Controller
 {
-
+    
     public function displayLogin()
     {
     }
@@ -22,7 +22,6 @@ class BackendController extends Controller
     {
     }
 
-
     public function displayAdminArticles()
     {
     }
@@ -30,7 +29,6 @@ class BackendController extends Controller
     public function displayAdminComments()
     {
     }
-
 
     public function displayAdminCategories()
     {

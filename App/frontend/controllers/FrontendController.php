@@ -5,12 +5,13 @@ use App\library\BlogFram\Controller;
 
 class FrontendController extends Controller
 {
+
     public function displayHome()
     {
     }
 
     public function displayArticles()
-    {
+    {        
     }
 
     public function displayCategories()
@@ -20,4 +21,5 @@ class FrontendController extends Controller
     public function displayError()
     {
     }
+
 }
