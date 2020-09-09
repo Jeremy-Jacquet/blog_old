@@ -11,11 +11,13 @@ class FrontendController extends Controller
     }
 
     public function displayArticles()
-    {        
+    {
+        $articles = $this->articleManager->getAllArticles();
     }
 
     public function displayCategories()
     {
+        $categories = $this->categoryManager->getAllCategories();
     }
 
     public function displayError()
