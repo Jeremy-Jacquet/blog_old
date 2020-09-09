@@ -1,37 +1,54 @@
 <?php
 namespace App\library\BlogFram;
 
+use App\library\BlogFram\Translate;
+
 trait Route
 {
-    private $modules =   [
-                        HOME,
-                        POSTS,
-                        CATEGORIES,
-                        COMMENTS,
-                        AUTHORS,
-                        PROFILE,
-                        LOGIN,
-                        LOGOUT,
-                        REGISTER,
-                        ADMIN
-                        ];
+    private $modulesWithAction = [POSTS, CATEGORIES, COMMENTS, AUTHORS, USERS];
+    private $modulesWithoutAction = [ADMIN, LOGIN, LOGOUT, PROFILE, REGISTER];
 
-    private $actions =  [
-                        ADD,
-                        UP,
-                        DEL,
-                        null
-                        ];
+    use Translate;
 
-    public function existsModule($module)
+    public function getRouteByController($controllerName, $module)
     {
-        return in_array($module, $this->modules)? true : false;
+        if($controllerName === 'backend') {
+            $route = 'displayAdmin'.ucfirst($this->translate($module));
+        } elseif($controllerName === 'frontend') {
+            $route = 'display'.ucfirst($this->translate($module));
+        }
+        return $route;
     }
 
-    public function existsAction($action)
+    public function verifyRoute($access, $module, $action, $id)
     {
-        return in_array($action, $this->actions)? true : false;
-    }
+        if($access === ADMIN) {
+            if(in_array($module, $this->modulesWithAction)) {
+                if($action === null) {
+                    return true;
+                }
+                elseif($action === (ADD)){
+                    if($id === null){
+                        return true;
+                    }
+                } elseif($action === (UP OR DEL)) {
+                    if(($id !== null) AND is_numeric($id)) {
+                        return true;
+                    }
+                }
+            }
+        } else {
+            if(in_array($module, $this->modulesWithAction) OR in_array($module, $this->modulesWithoutAction)) {
+                if($action === null) {
+                    if(($id !== null) AND is_numeric($id)) {
+                        return true;
+                    } elseif($id === null) {
+                        return true;
+                    }
+                }
+            }
+        }
 
+    }
 
 }
