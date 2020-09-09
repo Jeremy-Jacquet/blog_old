@@ -40,9 +40,7 @@ trait Route
         } else {
             if(in_array($module, $this->modulesWithAction) OR in_array($module, $this->modulesWithoutAction)) {
                 if($action === null) {
-                    if(($id !== null) AND is_numeric($id)) {
-                        return true;
-                    } elseif($id === null) {
+                    if((($id !== null) AND is_numeric($id)) OR ($id === null)) {
                         return true;
                     }
                 }
