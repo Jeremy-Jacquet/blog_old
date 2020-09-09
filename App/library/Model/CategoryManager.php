@@ -2,20 +2,15 @@
 namespace App\library\Model;
 
 use App\library\BlogFram\Database;
+use App\library\BlogFram\Manager;
 use App\library\Entity\Category;
 use \PDO;
 
-class CategoryManager extends Database
+class CategoryManager extends Manager
 {
     public function getAllCategories($validation = null)
     {
-        if(!empty($validation)) {
-            $req = $this->getPDO()->prepare("SELECT * FROM categories WHERE validate = :validate");
-            $req->bindValue(':validate', $validation, PDO::PARAM_INT);
-        } else {
-            $req = $this->getPDO()->query("SELECT * FROM categories");
-        }
-        $req->execute();
+        $req = parent::getAll('categories', $validation);
         while ($data = $req->fetch(PDO::FETCH_ASSOC)) {
             $category = new Category($data);
             $allCategories [] = $category;
@@ -26,7 +21,7 @@ class CategoryManager extends Database
 
     public function getCategory($id)
     {
-        $req = $this->getPDO()->prepare("SELECT * FROM categories WHERE id = :id");
+        $req = Database::getPDO()->prepare("SELECT * FROM categories WHERE id = :id");
         $req->bindValue(':id', $id, PDO::PARAM_INT);
         $req->execute();
         $data = $req->fetch(PDO::FETCH_ASSOC);
@@ -37,7 +32,7 @@ class CategoryManager extends Database
 
     public function addCategory(Object $category, $imagePath)
     {
-        $req = $this->getPDO()->prepare("INSERT INTO categories (title, imagePath, validate) 
+        $req = Database::getPDO()->prepare("INSERT INTO categories (title, imagePath, validate) 
                                         VALUES (:title, :imagePath, :validate)");
         $req->bindValue(':title', $category->getTitle(), PDO::PARAM_STR);
         $req->bindValue(':imagePath', $imagePath, PDO::PARAM_STR);
@@ -48,7 +43,7 @@ class CategoryManager extends Database
 
     public function updateCategory($id, $attribute, $value)
     {
-        $req = $this->getPDO()->prepare("UPDATE categories SET $attribute = :valueAttribute WHERE id = :id");
+        $req = Database::getPDO()->prepare("UPDATE categories SET $attribute = :valueAttribute WHERE id = :id");
         $req->bindValue(':valueAttribute', $value);
         $req->bindValue(':id', $id, PDO::PARAM_INT);
         $req->execute();
@@ -57,7 +52,7 @@ class CategoryManager extends Database
 
     public function deleteCategory($id)
     {
-        $req = $this->getPDO()->prepare("DELETE FROM categories WHERE id = :id");
+        $req = Database::getPDO()->prepare("DELETE FROM categories WHERE id = :id");
         $req->bindValue(':id', $id, PDO::PARAM_INT);
         $req->execute();
         $req->closeCursor();
@@ -65,7 +60,7 @@ class CategoryManager extends Database
 
     public function existsCategory($id)
     {
-        $req = $this->getPDO()->prepare('SELECT title FROM categories WHERE id = :id');
+        $req = Database::getPDO()->prepare('SELECT title FROM categories WHERE id = :id');
         $req->bindValue(':id', $id, PDO::PARAM_INT);
         $req->execute();
         $data = $req->fetch(PDO::FETCH_ASSOC);

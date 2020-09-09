@@ -2,20 +2,16 @@
 namespace App\library\Model;
 
 use App\library\BlogFram\Database;
+use App\library\BlogFram\Manager;
 use App\library\Entity\Article;
 use \PDO;
 
-class ArticleManager extends Database
+class ArticleManager extends Manager
 {
+
     public function getAllArticles($validation = null)
     {
-        if(!empty($validation)) {
-                $req = $this->getPDO()->prepare("SELECT * FROM articles WHERE validate = :validate");
-                $req->bindValue(':validate', $validation, PDO::PARAM_INT);
-        } else {
-            $req = $this->getPDO()->query("SELECT * FROM articles");
-        }
-        $req->execute();
+        $req = parent::getAll('articles', $validation);
         while ($data = $req->fetch(PDO::FETCH_ASSOC)) {
             $article = new Article($data);
             $allArticles [] = $article;
@@ -27,7 +23,7 @@ class ArticleManager extends Database
 
     public function getLastArticles($numberArticles)
     {
-        $req = $this->getPDO()->prepare("SELECT * FROM articles WHERE validate = 1 ORDER BY id DESC LIMIT :numberArticles");
+        $req = Database::getPDO()->prepare("SELECT * FROM articles WHERE validate = 1 ORDER BY id DESC LIMIT :numberArticles");
         $req->bindValue(':numberArticles', $numberArticles, PDO::PARAM_INT);
         $req->execute();
         while ($data = $req->fetch(PDO::FETCH_ASSOC)) {
@@ -40,7 +36,7 @@ class ArticleManager extends Database
 
     public function getAllArticlesByCategory($idCategory)
     {
-        $req = $this->getPDO()->prepare("SELECT * FROM articles WHERE idCategory = :idCategory");
+        $req = Database::getPDO()->prepare("SELECT * FROM articles WHERE idCategory = :idCategory");
         $req->bindValue(':idCategory', $idCategory, PDO::PARAM_INT);
         $req->execute();
         while ($data = $req->fetch(PDO::FETCH_ASSOC)) {
@@ -53,7 +49,7 @@ class ArticleManager extends Database
 
     public function getArticle($id)
     {
-        $req = $this->getPDO()->prepare("SELECT * FROM articles WHERE id = :id");
+        $req = Database::getPDO()->prepare("SELECT * FROM articles WHERE id = :id");
         $req->bindValue(':id', $id, PDO::PARAM_INT);
         $req->execute();
         $data = $req->fetch(PDO::FETCH_ASSOC);
@@ -64,7 +60,7 @@ class ArticleManager extends Database
 
     public function addArticle(Object $article, $imagePath)
     {
-        $req = $this->getPDO()->prepare("INSERT INTO articles (title, sentence, content, dateArticle, idAuthor, idCategory, imagePath, validate) 
+        $req = Database::getPDO()->prepare("INSERT INTO articles (title, sentence, content, dateArticle, idAuthor, idCategory, imagePath, validate) 
                                         VALUES (:title, :sentence, :content, NOW(), :idAuthor, :idCategory, :imagePath, :validate)");
         $req->bindValue(':title', $article->getTitle(), PDO::PARAM_STR);
         $req->bindValue(':sentence', $article->getSentence(), PDO::PARAM_STR);
@@ -79,7 +75,7 @@ class ArticleManager extends Database
 
     public function updateArticle($id, $attribute, $value)
     {
-        $req = $this->getPDO()->prepare("UPDATE articles SET $attribute = :valueAttribute WHERE id = :id");
+        $req = Database::getPDO()->prepare("UPDATE articles SET $attribute = :valueAttribute WHERE id = :id");
         $req->bindValue(':valueAttribute', $value);
         $req->bindValue(':id', $id, PDO::PARAM_INT);
         $req->execute();
@@ -88,7 +84,7 @@ class ArticleManager extends Database
 
     public function deleteArticle($id)
     {
-        $req = $this->getPDO()->prepare("DELETE FROM articles WHERE id = :id");
+        $req = Database::getPDO()->prepare("DELETE FROM articles WHERE id = :id");
         $req->bindValue(':id', $id, PDO::PARAM_INT);
         $req->execute();
         $req->closeCursor();
@@ -96,7 +92,7 @@ class ArticleManager extends Database
 
     public function existsArticle($id)
     {
-        $req = $this->getPDO()->prepare('SELECT title FROM articles WHERE id = :id');
+        $req = Database::getPDO()->prepare('SELECT title FROM articles WHERE id = :id');
         $req->bindValue(':id', $id, PDO::PARAM_INT);
         $req->execute();
         $data = $req->fetch(PDO::FETCH_ASSOC);

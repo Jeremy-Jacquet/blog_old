@@ -2,21 +2,16 @@
 namespace App\library\Model;
 
 use App\library\BlogFram\Database;
+use App\library\BlogFram\Manager;
 use App\library\Entity\User;
 use \PDO;
 
-class UserManager extends Database
+class UserManager extends Manager
 {
 
     public function getAllUsers($validation = null)
     {
-        if(!empty($validation)) {
-            $req = $this->getPDO()->prepare("SELECT * FROM users WHERE validate = :validate");
-            $req->bindValue(':validate', $validation, PDO::PARAM_INT);
-        } else {
-            $req = $this->getPDO()->query("SELECT * FROM users");
-        }
-        $req->execute();
+        $req = parent::getAll('users', $validation);
         while ($data = $req->fetch(PDO::FETCH_ASSOC)) {
             $user = new User($data);
             $allUsers [] = $user;
@@ -27,7 +22,7 @@ class UserManager extends Database
 
     public function getUser($id)
     {
-        $req = $this->getPDO()->prepare("SELECT * FROM users WHERE id = :id");
+        $req = Database::getPDO()->prepare("SELECT * FROM users WHERE id = :id");
         $req->bindValue(':id', $id, PDO::PARAM_INT);
         $req->execute();
         $data = $req->fetch(PDO::FETCH_ASSOC);
@@ -38,7 +33,7 @@ class UserManager extends Database
 
     public function getUserByPseudo($pseudo)
     {
-        $req = $this->getPDO()->prepare("SELECT * FROM users WHERE pseudo = :pseudo");
+        $req = Database::getPDO()->prepare("SELECT * FROM users WHERE pseudo = :pseudo");
         $req->bindValue(':pseudo', $pseudo, PDO::PARAM_STR);
         $req->execute();
         $data = $req->fetch(PDO::FETCH_ASSOC);
@@ -50,7 +45,7 @@ class UserManager extends Database
     public function addUser($userArray)
     {
         $user = new User($userArray);
-        $req = $this->getPDO()->prepare("INSERT INTO users (pseudo, pass, email, imagePath, dateRegistration, newsletter, access, validate) 
+        $req = Database::getPDO()->prepare("INSERT INTO users (pseudo, pass, email, imagePath, dateRegistration, newsletter, access, validate) 
                                         VALUES (:pseudo, :pass, :email, :imagePath, NOW(), :newsletter, :access, :validate)");
         $req->bindValue(':pseudo', $user->getPseudo(), PDO::PARAM_STR);
         $req->bindValue(':pass', $user->getPass(), PDO::PARAM_STR);
@@ -66,7 +61,7 @@ class UserManager extends Database
 
     public function updateUser($id, $attribute, $value)
     {
-        $req = $this->getPDO()->prepare("UPDATE users SET $attribute = :valueAttribute WHERE id = :id");
+        $req = Database::getPDO()->prepare("UPDATE users SET $attribute = :valueAttribute WHERE id = :id");
         $req->bindValue(':valueAttribute', $value);
         $req->bindValue(':id', $id, PDO::PARAM_INT);
         $req->execute();
@@ -75,7 +70,7 @@ class UserManager extends Database
 
     public function deleteUser($id)
     {
-        $req = $this->getPDO()->prepare("DELETE FROM users WHERE id = :id");
+        $req = Database::getPDO()->prepare("DELETE FROM users WHERE id = :id");
         $req->bindValue(':id', $id, PDO::PARAM_INT);
         $req->execute();
         $req->closeCursor();
@@ -83,7 +78,7 @@ class UserManager extends Database
 
     public function existsUser($pseudo, $pass)
     {
-        $req = $this->getPDO()->prepare('SELECT pass FROM users WHERE pseudo = :pseudo');
+        $req = Database::getPDO()->prepare('SELECT pass FROM users WHERE pseudo = :pseudo');
         $req->bindValue(':pseudo', $pseudo, PDO::PARAM_STR);
         $req->execute();
         $data = $req->fetch(PDO::FETCH_ASSOC);
@@ -95,7 +90,7 @@ class UserManager extends Database
 
     public function existsPseudo($pseudo)
     {
-        $req = $this->getPDO()->prepare('SELECT id FROM users WHERE pseudo = :pseudo');
+        $req = Database::getPDO()->prepare('SELECT id FROM users WHERE pseudo = :pseudo');
         $req->bindValue(':pseudo', $pseudo, PDO::PARAM_STR);
         $req->execute();
         $data = $req->fetch(PDO::FETCH_ASSOC);
