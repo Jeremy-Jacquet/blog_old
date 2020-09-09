@@ -1,9 +1,6 @@
 <?php
 namespace App\library\BlogFram;
 
-use App\backend\controllers\BackendController;
-use App\frontend\controllers\FrontendController;
-
 class HTTPResponse
 {
     private $access;
@@ -11,7 +8,7 @@ class HTTPResponse
     private $action;
     private $id;
     private $post = [];
-    private $controller;
+    private $controllerName;
 
     public function __construct($url, $post)
     {
@@ -75,9 +72,9 @@ class HTTPResponse
         return $this->post;
     }
 
-    public function getController()
+    public function getControllerName()
     {
-        return $this->controller;
+        return $this->controllerName;
     }
 
     //SETTERS
@@ -110,9 +107,11 @@ class HTTPResponse
     public function setController()
     {
         if($this->getAccess() === ADMIN) {
-            $this->controller = new BackendController;
+            $this->controllerName = 'backend';
+        }elseif($this->getModule() === (LOGIN OR LOGOUT OR REGISTER)) {
+            $this->controllerName = 'backend';
         } else {
-            $this->controller = new FrontendController;
+            $this->controllerName = 'frontend';
         }
     }
 
