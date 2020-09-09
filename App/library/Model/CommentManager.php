@@ -22,9 +22,7 @@ class CommentManager extends Manager
 
     public function getAllCommentsByArticle($idArticle)
     {
-        $req = Database::getPDO()->prepare("SELECT * FROM comments WHERE idArticle = :idArticle");
-        $req->bindValue(':idArticle', $idArticle, PDO::PARAM_INT);
-        $req->execute();
+        $req = parent::getAllBy('comments', 'idArticle', $idArticle);
         while ($data = $req->fetch(PDO::FETCH_ASSOC)) {
             $comment = new Comment($data);
             $allComments [] = $comment;

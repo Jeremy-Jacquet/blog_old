@@ -19,7 +19,13 @@ abstract class Manager
         return $req;
     }
 
-
+    public function getAllBy($from, $where, $id)
+    {
+        $req = Database::getPDO()->prepare("SELECT * FROM $from WHERE $where = :$where");
+        $req->bindValue(':'.$where, $id, PDO::PARAM_INT);
+        $req->execute();
+        return $req;
+    }
 
 
 }

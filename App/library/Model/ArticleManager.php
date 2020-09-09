@@ -36,9 +36,7 @@ class ArticleManager extends Manager
 
     public function getAllArticlesByCategory($idCategory)
     {
-        $req = Database::getPDO()->prepare("SELECT * FROM articles WHERE idCategory = :idCategory");
-        $req->bindValue(':idCategory', $idCategory, PDO::PARAM_INT);
-        $req->execute();
+        $req = parent::getAllBy('articles', 'idCategory', $idCategory);
         while ($data = $req->fetch(PDO::FETCH_ASSOC)) {
             $article = new Article($data);
             $allArticles [] = $article;
