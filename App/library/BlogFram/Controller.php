@@ -14,6 +14,7 @@ class Controller
     protected $categoryManager;
     protected $commentManager;
     protected $authorManager;
+    protected $twig;
 
     public function __construct()
     {
@@ -22,5 +23,14 @@ class Controller
         $this->categoryManager = new CategoryManager();
         $this->commentManager = new CommentManager();
         $this->authorManager = new AuthorManager();
+        $this->setTwig();
+    }
+
+    private function setTwig()
+    {
+        $loader = new \Twig\Loader\FilesystemLoader(__DIR__ . '/../../templates');
+        $this->twig = new \Twig\Environment($loader, [
+            'cache' => false, //__DIR__ . '../../../public/tmp'
+        ]);
     }
 }
