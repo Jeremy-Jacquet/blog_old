@@ -6,7 +6,7 @@ use App\library\BlogFram\Translate;
 trait Route
 {
     private $modulesWithAction = [POSTS, CATEGORIES, COMMENTS, AUTHORS, USERS];
-    private $modulesWithoutAction = [ADMIN, LOGIN, LOGOUT, PROFILE, REGISTER];
+    private $modulesWithoutAction = [HOME, ADMIN, LOGIN, LOGOUT, PROFILE, REGISTER];
 
     use Translate;
 

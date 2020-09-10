@@ -17,28 +17,32 @@ class HTTPResponse
     
     public function setAttributes($url, $post)
     {
-        if(empty($url[1])) {
-            $this->setModule($url[0]);
-        } elseif(empty($url[2])) {
-            if($url[0] === ADMIN) {
-                $this->setAccess(ADMIN);
-                $this->setModule($url[1]);              
-            } else {
+        if(empty($url)) {
+            $this->setModule(HOME);
+        } else {
+            if(empty($url[1])) {
                 $this->setModule($url[0]);
-                $this->setId($url[1]);
-            }       
-        } elseif(empty($url[3])) {
-            if($url[0] === ADMIN) {
-                $this->setAccess(ADMIN);
-                $this->setModule($url[1]);
-                $this->setAction($url[2]);  
-            }
-        } elseif(empty($url[4])) {
-            if($url[0] === ADMIN) {
-                $this->setAccess(ADMIN);
-                $this->setModule($url[1]);
-                $this->setAction($url[2]);
-                $this->setId($url[3]); 
+            } elseif(empty($url[2])) {
+                if($url[0] === ADMIN) {
+                    $this->setAccess(ADMIN);
+                    $this->setModule($url[1]);              
+                } else {
+                    $this->setModule($url[0]);
+                    $this->setId($url[1]);
+                }       
+            } elseif(empty($url[3])) {
+                if($url[0] === ADMIN) {
+                    $this->setAccess(ADMIN);
+                    $this->setModule($url[1]);
+                    $this->setAction($url[2]);  
+                }
+            } elseif(empty($url[4])) {
+                if($url[0] === ADMIN) {
+                    $this->setAccess(ADMIN);
+                    $this->setModule($url[1]);
+                    $this->setAction($url[2]);
+                    $this->setId($url[3]); 
+                }
             }
         }
         $this->setPost($post);
