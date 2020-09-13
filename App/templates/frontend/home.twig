@@ -1,27 +1,254 @@
-{% extends 'frontend/layout.twig' %}
+{% extends 'frontend_layout.twig' %}
+
+{% import 'macros/form.twig' as form %}
 
 {% block content %}
 
-    <h1>{{ title.1 }}</h1>
+    <!-- HEADER -->
+    <header class="masthead bg-primary text-white text-center">
+        <div class="container d-flex align-items-center flex-column">
+            <!-- Masthead Avatar Image-->
+            <img class="masthead-avatar mb-5" src="assets/img/avatar/avatar_admin.svg" alt="">
+            <!-- Masthead Heading-->
+            <h1 class="masthead-heading mb-0">Jérémy JACQUET</h1>
+            <!-- Icon Divider-->
+            <div class="divider-custom divider-light">
+                <div class="divider-custom-line"></div>
+                <div class="divider-custom-icon"><i class="fas fa-star"></i></div>
+                <div class="divider-custom-line"></div>
+            </div>
+            <!-- Masthead Subheading-->
+            <p class="masthead-subheading font-weight-light mb-0">Développeur PHP / MySQL</p>
+        </div>
+    </header>
 
-    <p>
-        Lorem Ipsum is simply dummy text of the printing and typesetting industry. 
-        Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, 
-        when an unknown printer took a galley of type and scrambled it to make a type specimen book. 
-        It has survived not only five centuries, but also the leap into electronic typesetting, 
-        remaining essentially unchanged. 
-        It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, 
-        and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
-    </p>
+    <div class="container">
 
-    <h2>{{ title.2 }}</h2>
+        <!-- LAST POSTS -->
+        <section class="page-section post" id="actu">
+                <div class="container">
+                    <!-- Posts Section Heading-->
+                    <div class="text-center">
+                        <h2 class="page-section-heading text-secondary mb-0 d-inline-block">Derniers articles</h2>
+                    </div>
+                    <!-- Icon Divider-->
+                    <div class="divider-custom">
+                        <div class="divider-custom-line"></div>
+                        <div class="divider-custom-icon"><i class="fas fa-star"></i></div>
+                        <div class="divider-custom-line"></div>
+                    </div>
+                    <!-- Posts Grid Items-->
+                    <div class="row justify-content-center">
+                        {% for article in articles %}
+                            <!-- Posts Items-->
+                            <div class="col-md-6 col-lg-4 mb-5">
+                                <div class="post-item mx-auto" data-toggle="modal" data-target="#post-{{ article.id }}">
+                                    <div class="post-item-caption d-flex align-items-center justify-content-center h-100 w-100">
+                                        <div class="post-item-caption-content text-center text-white"><i class="fas fa-plus fa-3x"></i></div>
+                                    </div><img class="img-fluid" src="assets/img/post/post-{{ article.id }}.png" alt="Log Cabin"/>
+                                </div>
+                            </div>
+                        {% endfor %}
+                    </div>
+                </div>
+        </section>
 
-    {% for article in articles %}
+        <!-- Post Modal-->
+        {% for article in articles %}
+            <div class="post-modal modal fade" id="post-{{ article.id }}" tabindex="-1" role="dialog" aria-labelledby="#post-{{ article.id }}Label" aria-hidden="true">
+                <div class="modal-dialog modal-xl" role="document">
+                    <div class="modal-content">
+                        <button class="close" type="button" data-dismiss="modal" aria-label="Close"><span aria-hidden="true"><i class="fas fa-times"></i></span></button>
+                        <div class="modal-body text-center">
+                            <div class="container">
+                                <div class="row justify-content-center">
+                                    <div class="col-lg-8">
+                                        <!-- Post Modal - Title-->
+                                        <h2 class="post-modal-title text-secondary mb-0">Log Cabin</h2>
+                                        <!-- Icon Divider-->
+                                        <div class="divider-custom">
+                                            <div class="divider-custom-line"></div>
+                                            <div class="divider-custom-icon"><i class="fas fa-star"></i></div>
+                                            <div class="divider-custom-line"></div>
+                                        </div>
+                                        <!-- Post Modal - Image--><img class="img-fluid rounded mb-5" src="assets/img/post/post-{{ article.id }}.png" alt="Log Cabin"/>
+                                        <!-- Post Modal - Text-->
+                                        <p class="mb-5">Article n°{{ article.id }} --- {{ article.sentence }}</p>
+                                        <button class="btn btn-primary" href="#" data-dismiss="modal"><i class="fas fa-times fa-fw"></i>Close Window</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
 
-        <p>
-            {{ article.sentence }}
-        </p>
+        <!-- ALL POSTS -->
+        <section class="page-section bg-primary text-white" style="margin-bottom: 100px" id="articles">
+            <div class="container">
+                <!-- About Section Heading-->
+                <div class="text-center">
+                    <h2 class="page-section-heading d-inline-block text-white">Tous les articles</h2>
+                </div>
+                <!-- Icon Divider-->
+                <div class="divider-custom divider-light">
+                    <div class="divider-custom-line"></div>
+                    <div class="divider-custom-icon"><i class="fas fa-star"></i></div>
+                    <div class="divider-custom-line"></div>
+                </div>
+                <!-- About Section Content-->
+                <div class="row">
+                    <div class="col-lg-3 ml-auto">
+                        <h3>Categorie 1</h3>
+                        <p class="lead">
+                            Lorem Ipsum is simply dummy text of the printing and typesetting industry. 
+                            Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, 
+                            when an unknown printer took a galley of type and scrambled it to make a type specimen book.
+                        </p>
+                    </div>
+                    <div class="col-lg-3 mx-auto">
+                        <h3>Categorie 2</h3>
+                        <p class="lead">
+                            Lorem Ipsum is simply dummy text of the printing and typesetting industry. 
+                            Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, 
+                            when an unknown printer took a galley of type and scrambled it to make a type specimen book.
+                        </p>
+                    </div>
+                    <div class="col-lg-3 mr-auto">
+                        <h3>Categorie 3</h3>
+                        <p class="lead">
+                            Lorem Ipsum is simply dummy text of the printing and typesetting industry. 
+                            Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, 
+                            when an unknown printer took a galley of type and scrambled it to make a type specimen book.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
 
-    {% endfor %}
+        <!-- ABOUT -->
+        <section class="page-section bg-primary text-white mb-0" id="a_propos">
+            <div class="container">
+                <!-- About Section Heading-->
+                <div class="text-center">
+                    <h2 class="page-section-heading d-inline-block text-white">A propos</h2>
+                </div>
+                <!-- Icon Divider-->
+                <div class="divider-custom divider-light">
+                    <div class="divider-custom-line"></div>
+                    <div class="divider-custom-icon"><i class="fas fa-star"></i></div>
+                    <div class="divider-custom-line"></div>
+                </div>
+                <!-- About Section Content-->
+                <div class="row">
+                    <div class="col-lg-4 ml-auto">
+                        <p class="lead">
+                            Lorem Ipsum is simply dummy text of the printing and typesetting industry. 
+                            Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, 
+                            when an unknown printer took a galley of type and scrambled it to make a type specimen book.
+                        </p>
+                    </div>
+                    <div class="col-lg-4 mr-auto">
+                        <p class="lead">
+                            Lorem Ipsum is simply dummy text of the printing and typesetting industry. 
+                            Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, 
+                            when an unknown printer took a galley of type and scrambled it to make a type specimen book.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
 
-{% endblock %}
+        <!-- CONTACT -->
+        <section class="page-section" id="contact">
+            <div class="container">
+                <!-- Contact Section Heading-->
+                <div class="text-center">
+                    <h2 class="page-section-heading text-secondary d-inline-block mb-0">Me contacter</h2>
+                </div>
+                <!-- Icon Divider-->
+                <div class="divider-custom">
+                    <div class="divider-custom-line"></div>
+                    <div class="divider-custom-icon">
+                        <i class="fas fa-star"></i>
+                    </div>
+                    <div class="divider-custom-line"></div>
+                </div>
+                <!-- Contact Section Content-->
+                <div class="row justify-content-center">
+                    <div class="col-lg-4">
+                        <div class="d-flex flex-column align-items-center">
+                            <div class="icon-contact mb-3"><i class="fas fa-mobile-alt"></i></div>
+                            <div class="text-muted">Téléphone</div>
+                            <div class="lead font-weight-bold">
+                                <p>06 05 10 15 20</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4">
+                        <div class="d-flex flex-column align-items-center"  data-toggle="modal" data-target="#form-contact">
+                            <div class="icon-contact mb-3">
+                                <i class="far fa-comment-dots"></i>
+                            </div>
+                            <div class="text-muted">Formulaire</div>
+                            <div class="lead font-weight-bold">
+                                <p>Ecrivez-moi</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4">
+                        <div class="d-flex flex-column align-items-center">
+                            <div class="icon-contact mb-3">
+                                <i class="far fa-envelope"></i>
+                            </div>
+                            <div class="text-muted">Email</div>
+                            <a class="lead font-weight-bold" href="mailto:name@example.com">
+                                <p>j.jacquet.contact@gmail.com</p>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Form Modal-->
+        <div class="post-modal modal fade" id="form-contact" tabindex="-1" role="dialog" aria-labelledby="#form-contactLabel" aria-hidden="true">
+            <div class="modal-dialog modal-lg" role="document">
+                <div class="modal-content">
+                    <button class="close" type="button" data-dismiss="modal" aria-label="Close"><span aria-hidden="true"><i class="fas fa-times"></i></span></button>
+                    <div class="modal-body text-center">
+                        <div class="container">
+                            <div class="row justify-content-center">
+                                <div class="col-lg-8">
+                                    <!-- Post Modal - Title-->
+                                    <h2 class="post-modal-title text-secondary mb-0">Envoyer un message</h2>
+                                    <!-- Icon Divider-->
+                                    <div class="divider-custom">
+                                        <div class="divider-custom-line"></div>
+                                        <div class="divider-custom-icon"><i class="fas fa-star"></i></div>
+                                        <div class="divider-custom-line"></div>
+                                    </div>
+
+                                    <form action="#" method="#">
+                                        <div class="form-group col-xs-6">
+                                            <input type="text" id="name" name="name" placeholder="Votre nom" required>
+                                        </div>
+                                        <div class="form-group col-xs-6">
+                                            <input type="email" id="email" name="email" placeholder="Votre email" required>
+                                        </div>
+                                        <div class="form-group mx-auto">
+                                            <textarea id="message" name="message" cols="30" rows="10" placeholder="Votre message" required></textarea>
+                                        </div>
+                                    </form>
+                                    <button type="submit" class="btn btn-primary">Envoyer<i class="fas fa-paper-plane"></i></button>
+                                    <button class="btn btn-primary" href="#" data-dismiss="modal">Fermer<i class="fas fa-times fa-fw"></i></button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock content %}
