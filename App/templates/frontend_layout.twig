@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <meta name="description" content="">
+        <meta name="author" content="">
+        <!-- TITLE -->
+        {% block title %}<title>{{ title }}</title>{% endblock title %}
+
+        <!-- LINK -->
+        {% block link %}{{ include('includes/link.twig') }}{% endblock link %}
+    </head>
+    <body>
+
+    <!-- NAV -->
+    {% block nav %}{{ include('includes/nav.twig') }}{% endblock nav %}
+
+    <!-- CONTENT -->
+    {% block content %}{% endblock content %}
+
+    <!-- FOOTER -->
+    {% block footer %}{{ include('includes/footer.twig') }}{% endblock footer %}
+
+    <!-- COPYRIGHT -->
+    {% block copyright %}{{ include('includes/copyright.twig') }}{% endblock copyright %}  
+
+    <!-- JS SCRIPTS -->
+    {% block scripts %}{{ include('includes/scripts.twig') }}{% endblock scripts %}  
+
+    </body>
+</html>
