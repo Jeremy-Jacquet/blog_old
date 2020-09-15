@@ -1,0 +1,65 @@
+{% extends 'frontend_layout.twig' %}
+
+
+{% block content %}
+
+    <!-- HEADER -->
+    <header class="masthead bg-primary text-white text-center" id="page-top">
+        <div class="container d-flex align-items-center flex-column">
+            <!-- Masthead Heading-->
+            <h1 class="masthead-heading mb-0">Le développement web: un Art</h1>
+            <!-- Icon Divider-->
+            <div class="divider-custom divider-light">
+                <div class="divider-custom-line"></div>
+                <div class="divider-custom-icon"><i class="fas fa-star"></i></div>
+                <div class="divider-custom-line"></div>
+            </div>
+            <!-- Masthead Subheading-->
+            <p class="masthead-subheading font-weight-light mb-0">
+                <a class="a-white nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" data-toggle="modal" data-target="#" href="">
+                    Rejoignez notre forum pour en discuter.
+                </a>
+            </p>
+        </div>
+    </header>
+
+    <div class="container">
+        <!-- LAST POSTS -->
+        <section class="page-section post" id="">
+            <div class="container">
+                <!-- Posts Section Heading-->
+                <div class="text-center">
+                    <h2 class="page-section-heading text-secondary mb-0 d-inline-block">Tous les articles</h2>
+                </div>
+                <!-- Icon Divider-->
+                <div class="divider-custom">
+                    <div class="divider-custom-line"></div>
+                    <div class="divider-custom-icon"><i class="fas fa-star"></i></div>
+                    <div class="divider-custom-line"></div>
+                </div>
+                <!-- Posts Grid Items-->
+                <div class="row justify-content-center">
+                    {% for article in articles %}
+                        <!-- Posts Items-->
+                        <div class="col-md-6 mb-5">
+                            <div class="post-item mx-auto" data-toggle="modal" data-target="#post-{{ article.id }}">
+                                <div class="post-item-caption d-flex align-items-center justify-content-center h-100 w-100">
+                                    <div class="post-item-caption-content text-center text-white"><i class="fas fa-plus fa-3x"></i></div>
+                                </div>
+                                <img class="img-fluid" src="{{ article.imagePath }}" alt="Picture post-{{ article.id }} "/>
+                                <p class="thumbnail-title">{{ article.title }}</p>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </section>
+        <!-- MODAL-->
+        {% for article in articles %}
+            {{ include('includes/modals/post_home.twig') }}
+        {% endfor %}
+        {{ include('includes/modals/section_contact.twig') }}
+        {{ include('includes/modals/form_contact.twig') }}
+        {{ include('includes/modals/form_register.twig') }}
+    </div>
+{% endblock content %}

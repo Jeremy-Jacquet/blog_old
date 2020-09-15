@@ -1,0 +1,36 @@
+{% import 'macros/form.twig' as form %}
+
+<!-- Register Modal -->
+<div class="post-modal modal fade" id="form-register" tabindex="-1" role="dialog" aria-labelledby="#form-registerLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <button class="close" type="button" data-dismiss="modal" aria-label="Close"><span aria-hidden="true"><i class="fas fa-times"></i></span></button>
+            <div class="modal-body text-center">
+                <div class="container">
+                    <div class="row justify-content-center">
+                        <div class="col-lg-8">
+                            <!-- Register Modal - Title-->
+                            <h2 class="post-modal-title text-secondary mb-0">Inscrivez-vous</h2>
+                            <!-- Icon Divider-->
+                            <div class="divider-custom">
+                                <div class="divider-custom-line"></div>
+                                <div class="divider-custom-icon"><i class="fas fa-star"></i></div>
+                                <div class="divider-custom-line"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="justify-content-center">
+                        <form action="#" method="#">
+                            {{ form.input('pseudo', 'Votre pseudo', {require: true}) }}
+                            {{ form.input('email', 'Votre email', {type: 'email', require: true}) }}
+                            {{ form.input('pass', 'Votre mot de passe', {type: 'password', require: true}) }}
+                            {{ form.input('pass2', 'Confirmation du mot de passe', {type: 'password', require: true}) }}
+                            <button type="submit" class="btn btn-primary">Envoyer<i class="fas fa-paper-plane"></i></button>
+                            <button class="btn btn-primary" href="#" data-dismiss="modal">S'inscrire<i class="fas fa-times fa-fw"></i></button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

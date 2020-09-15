@@ -1,0 +1,11 @@
+{% macro li(value, href = null, options = []) %}
+    <li class="nav-item mx-0 mx-lg-1  {{ options.class_li }}">
+        {% if options.data_toggle %}
+            <a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger {{ options.class_a }}" data-toggle="{{ options.data_toggle }}" data-target="{{ options.data_target }}" href="">
+        {% else %}
+            <a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger {{ options.class_a }}" href="{{ URL ~ href }}">
+        {% endif %} 
+        {{ value | upper }}
+        </a>
+    </li>
+{% endmacro %}

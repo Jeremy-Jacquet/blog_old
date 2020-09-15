@@ -1,11 +1,9 @@
 {% extends 'frontend_layout.twig' %}
 
-{% import 'macros/form.twig' as form %}
-
 {% block content %}
 
     <!-- HEADER -->
-    <header class="masthead bg-primary text-white text-center">
+    <header class="masthead bg-primary text-white text-center" id="page-top">
         <div class="container d-flex align-items-center flex-column">
             <!-- Masthead Avatar Image-->
             <img class="masthead-avatar mb-5" src="assets/img/avatar/avatar_admin.svg" alt="">
@@ -41,11 +39,13 @@
                     <div class="row justify-content-center">
                         {% for article in articles %}
                             <!-- Posts Items-->
-                            <div class="col-md-6 col-lg-4 mb-5">
+                            <div class="col-md-6 mb-5">
                                 <div class="post-item mx-auto" data-toggle="modal" data-target="#post-{{ article.id }}">
                                     <div class="post-item-caption d-flex align-items-center justify-content-center h-100 w-100">
                                         <div class="post-item-caption-content text-center text-white"><i class="fas fa-plus fa-3x"></i></div>
-                                    </div><img class="img-fluid" src="assets/img/post/post-{{ article.id }}.png" alt="Log Cabin"/>
+                                    </div>
+                                    <img class="img-fluid" src="assets/img/post/post-{{ article.id }}.png" alt="Picture post-{{ article.id }} "/>
+                                    <p class="thumbnail-title">{{ article.title }}</p>
                                 </div>
                             </div>
                         {% endfor %}
@@ -55,33 +55,7 @@
 
         <!-- Post Modal-->
         {% for article in articles %}
-            <div class="post-modal modal fade" id="post-{{ article.id }}" tabindex="-1" role="dialog" aria-labelledby="#post-{{ article.id }}Label" aria-hidden="true">
-                <div class="modal-dialog modal-xl" role="document">
-                    <div class="modal-content">
-                        <button class="close" type="button" data-dismiss="modal" aria-label="Close"><span aria-hidden="true"><i class="fas fa-times"></i></span></button>
-                        <div class="modal-body text-center">
-                            <div class="container">
-                                <div class="row justify-content-center">
-                                    <div class="col-lg-8">
-                                        <!-- Post Modal - Title-->
-                                        <h2 class="post-modal-title text-secondary mb-0">Log Cabin</h2>
-                                        <!-- Icon Divider-->
-                                        <div class="divider-custom">
-                                            <div class="divider-custom-line"></div>
-                                            <div class="divider-custom-icon"><i class="fas fa-star"></i></div>
-                                            <div class="divider-custom-line"></div>
-                                        </div>
-                                        <!-- Post Modal - Image--><img class="img-fluid rounded mb-5" src="assets/img/post/post-{{ article.id }}.png" alt="Log Cabin"/>
-                                        <!-- Post Modal - Text-->
-                                        <p class="mb-5">Article n°{{ article.id }} --- {{ article.sentence }}</p>
-                                        <button class="btn btn-primary" href="#" data-dismiss="modal"><i class="fas fa-times fa-fw"></i>Close Window</button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            {{ include('includes/modals/post_home.twig') }}
         {% endfor %}
 
         <!-- ALL POSTS -->
@@ -89,7 +63,7 @@
             <div class="container">
                 <!-- About Section Heading-->
                 <div class="text-center">
-                    <h2 class="page-section-heading d-inline-block text-white">Tous les articles</h2>
+                    <h2 class="page-section-heading d-inline-block"><a class="a-white" href="{{ URL }}articles">Tous les articles</a></h2>
                 </div>
                 <!-- Icon Divider-->
                 <div class="divider-custom divider-light">
@@ -100,7 +74,7 @@
                 <!-- About Section Content-->
                 <div class="row">
                     <div class="col-lg-3 ml-auto">
-                        <h3>Categorie 1</h3>
+                        <h3><a class="a-white" href="{{ URL }}categories/1">Catégorie 1</a></h3>
                         <p class="lead">
                             Lorem Ipsum is simply dummy text of the printing and typesetting industry. 
                             Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, 
@@ -108,7 +82,7 @@
                         </p>
                     </div>
                     <div class="col-lg-3 mx-auto">
-                        <h3>Categorie 2</h3>
+                        <h3><a class="a-white" href="{{ URL }}categories/1">Catégorie 2</a></h3>
                         <p class="lead">
                             Lorem Ipsum is simply dummy text of the printing and typesetting industry. 
                             Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, 
@@ -116,7 +90,7 @@
                         </p>
                     </div>
                     <div class="col-lg-3 mr-auto">
-                        <h3>Categorie 3</h3>
+                        <h3><a class="a-white" href="{{ URL }}categories/1">Catégorie 3</a></h3>
                         <p class="lead">
                             Lorem Ipsum is simply dummy text of the printing and typesetting industry. 
                             Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, 
@@ -212,43 +186,7 @@
             </div>
         </section>
 
-        <!-- Form Modal-->
-        <div class="post-modal modal fade" id="form-contact" tabindex="-1" role="dialog" aria-labelledby="#form-contactLabel" aria-hidden="true">
-            <div class="modal-dialog modal-lg" role="document">
-                <div class="modal-content">
-                    <button class="close" type="button" data-dismiss="modal" aria-label="Close"><span aria-hidden="true"><i class="fas fa-times"></i></span></button>
-                    <div class="modal-body text-center">
-                        <div class="container">
-                            <div class="row justify-content-center">
-                                <div class="col-lg-8">
-                                    <!-- Post Modal - Title-->
-                                    <h2 class="post-modal-title text-secondary mb-0">Envoyer un message</h2>
-                                    <!-- Icon Divider-->
-                                    <div class="divider-custom">
-                                        <div class="divider-custom-line"></div>
-                                        <div class="divider-custom-icon"><i class="fas fa-star"></i></div>
-                                        <div class="divider-custom-line"></div>
-                                    </div>
-
-                                    <form action="#" method="#">
-                                        <div class="form-group col-xs-6">
-                                            <input type="text" id="name" name="name" placeholder="Votre nom" required>
-                                        </div>
-                                        <div class="form-group col-xs-6">
-                                            <input type="email" id="email" name="email" placeholder="Votre email" required>
-                                        </div>
-                                        <div class="form-group mx-auto">
-                                            <textarea id="message" name="message" cols="30" rows="10" placeholder="Votre message" required></textarea>
-                                        </div>
-                                    </form>
-                                    <button type="submit" class="btn btn-primary">Envoyer<i class="fas fa-paper-plane"></i></button>
-                                    <button class="btn btn-primary" href="#" data-dismiss="modal">Fermer<i class="fas fa-times fa-fw"></i></button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+        {{ include('includes/modals/form_contact.twig') }}
+        {{ include('includes/modals/form_register.twig') }}
     </div>
 {% endblock content %}
