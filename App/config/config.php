@@ -14,6 +14,8 @@ define('REGISTER', 'inscription');
 define('LOGOUT', 'deconnexion');
 define('ADMIN', 'admin');
 
+define('DASHBOARD', 'dashboard');
+
 define("ADD", 'ajouter');
 define("UP", 'modifier');
 define("DEL", 'supprimer');

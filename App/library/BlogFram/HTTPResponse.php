@@ -13,6 +13,8 @@ class HTTPResponse
     public function __construct($url, $post)
     {
         $this->setAttributes($url, $post);
+        $this->setPost($post);
+        $this->setController();
     }
     
     public function setAttributes($url, $post)
@@ -21,7 +23,12 @@ class HTTPResponse
             $this->setModule(HOME);
         } else {
             if(empty($url[1])) {
-                $this->setModule($url[0]);
+                if($url[0] === ADMIN) {
+                    $this->setAccess(ADMIN);
+                    $this->setModule(DASHBOARD);
+                } else {
+                    $this->setModule($url[0]);
+                }
             } elseif(empty($url[2])) {
                 if($url[0] === ADMIN) {
                     $this->setAccess(ADMIN);
@@ -45,8 +52,6 @@ class HTTPResponse
                 }
             }
         }
-        $this->setPost($post);
-        $this->setController();
     }
 
     // GETTERS

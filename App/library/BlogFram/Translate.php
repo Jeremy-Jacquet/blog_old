@@ -14,7 +14,8 @@ trait Translate
                         LOGIN => 'login',
                         LOGOUT => 'logout',
                         REGISTER => 'register',
-                        ADMIN => 'admin'
+                        ADMIN => 'admin',
+                        DASHBOARD => 'dashboard'
                         ];
 
     public function translate($data)

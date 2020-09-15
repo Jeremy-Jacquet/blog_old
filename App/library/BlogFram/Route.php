@@ -36,6 +36,8 @@ trait Route
                         return true;
                     }
                 }
+            } elseif($module === DASHBOARD) {
+                return true;
             }
         } else {
             if(in_array($module, $this->modulesWithAction) OR in_array($module, $this->modulesWithoutAction)) {
