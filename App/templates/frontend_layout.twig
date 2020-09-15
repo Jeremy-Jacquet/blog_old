@@ -6,7 +6,7 @@
         <meta name="description" content="">
         <meta name="author" content="">
         <!-- TITLE -->
-        {% block title %}<title>{{ title }}</title>{% endblock title %}
+        {% block title %}<title>{{ page }}</title>{% endblock title %}
 
         <!-- LINK -->
         {% block link %}{{ include('includes/link.twig') }}{% endblock link %}
@@ -14,7 +14,7 @@
     <body>
 
     <!-- NAV -->
-    {% block nav %}{{ include('includes/nav.twig') }}{% endblock nav %}
+    {% block nav %}{{ include('includes/nav.twig', {'page': page})}}{% endblock nav %}
 
     <!-- CONTENT -->
     {% block content %}{% endblock content %}
