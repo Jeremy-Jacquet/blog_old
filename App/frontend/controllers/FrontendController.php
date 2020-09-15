@@ -8,16 +8,20 @@ class FrontendController extends Controller
 
     public function displayHome()
     {
-        $pageTitle = "Accueil";
-        $title = [1 => 'Presentation', 2 => 'Derniers articles'];
         $lastArticles = $this->articleManager->getLastArticles(4);
-        echo $this->twig->render('frontend/home.twig', ['pageTitle' => $pageTitle,'title' => $title, 'articles' => $lastArticles]);
+        echo $this->twig->render('frontend/home.twig', [
+                                                        'page' => HOME, 
+                                                        'articles' => $lastArticles,
+                                                        ]);
     }
 
     public function displayArticles()
     {
-        echo 'Je suis la page des articles';
         $articles = $this->articleManager->getAllArticles();
+        echo $this->twig->render('frontend/all_posts.twig', [
+                                                            'page' => POSTS, 
+                                                            'articles' => $articles,
+                                                            ]);
     }
 
     public function displayCategories()
