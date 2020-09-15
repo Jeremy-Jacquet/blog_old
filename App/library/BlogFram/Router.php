@@ -30,9 +30,10 @@ class Router
                                 $this->HTTPResponse->getModule(),
                                 $this->HTTPResponse->getAction(),
                                 $this->HTTPResponse->getId())) {
-            $route = $this->getRouteByController($this->controllerName, $this->HTTPResponse->getModule());
-            $this->controller->$route($this->HTTPResponse->getAction(), $this->HTTPResponse->getId());
+            $routeMethod = $this->getRouteByController($this->controllerName, $this->HTTPResponse->getModule());
+            $this->controller->$routeMethod($this->HTTPResponse->getAction(), $this->HTTPResponse->getId());
         }
+        
     }
 
     public function getController() {
