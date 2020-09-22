@@ -1,0 +1,73 @@
+{% extends 'frontend_layout.twig' %}
+
+{% block content %}
+
+<!-- ADMINISTRATION -->
+<section class="page-section post mt-5" id="">
+    <div class="container">
+
+        <!-- ADD -->
+        <div class="row mb-5 py-3 bg-light-teal">
+            <div class="w-100">
+                <p class="text-center">{{'Ajouter' | upper }}</p>
+            </div>
+            <div class="col-md-6 col-lg-3">
+                <p class="text-center"><a class="a-admin" data-toggle="modal" data-target="#form-add" href="">{{'Article' | upper }}<i class="fas fa-plus ml-2"></i></a></p>
+            </div>
+            <div class="col-md-6 col-lg-3">
+                <p class="text-center"><a class="a-admin" data-toggle="modal" data-target="#form-add" href="">{{'Catégorie' | upper }}<i class="fas fa-plus ml-2"></i></a></p>
+            </div>
+            <div class="col-md-6 col-lg-3">
+                <p class="text-center"><a class="a-admin" data-toggle="modal" data-target="#form-add" href="">{{'Commentaire' | upper }}<i class="fas fa-plus ml-2"></i></a></p>
+            </div>
+            <div class="col-md-6 col-lg-3">
+                <p class="text-center"><a class="a-admin" data-toggle="modal" data-target="#form-add" href="">{{'Auteur' | upper }}<i class="fas fa-plus ml-2"></i></a></p>
+            </div>
+        </div>
+
+        <!-- UPDATE -->
+        <div class="row mb-5 py-3 bg-light-yellow">
+            <div class="w-100">
+                <p class="text-center">{{'Modifier' | upper }}</p>
+            </div>
+            <div class="col-md-6 col-lg-3">
+                    <p class="text-center"><a class="a-admin" data-toggle="modal" data-target="#form-add" href="">{{'Articles' | upper }}<i class="fas fa-list ml-2"></i></a></p>
+            </div>
+            <div class="col-md-6 col-lg-3">
+                    <p class="text-center"><a class="a-admin" data-toggle="modal" data-target="#form-add" href="">{{'Catégories' | upper }}<i class="fas fa-list ml-2"></i></a></p>
+            </div>
+            <div class="col-md-6 col-lg-3">
+                    <p class="text-center"><a class="a-admin" data-toggle="modal" data-target="#form-add" href="">{{'Commentaires' | upper }}<i class="fas fa-list ml-2"></i></a></p>
+            </div>
+            <div class="col-md-6 col-lg-3">
+                    <p class="text-center"><a class="a-admin" data-toggle="modal" data-target="#form-add" href="">{{'Auteurs' | upper }}<i class="fas fa-list ml-2"></i></a></p>
+            </div>
+        </div>
+
+        <!-- DELETE -->
+        <div class="row mb-5 py-3 bg-light-pink">
+            <div class="w-100">
+                <p class="text-center">{{'Supprimer' | upper }}</p>
+            </div>
+            <div class="col-md-6 col-lg-3">
+                <p class="text-center"><a class="a-admin" data-toggle="modal" data-target="#form-update" href="" role="button">{{'Article' | upper }}<i class="fas fa-trash ml-2"></i></a></p>
+            </div>
+            <div class="col-md-6 col-lg-3">
+                <p class="text-center"><a class="a-admin" data-toggle="modal" data-target="#form-update" href="" role="button">{{'Catégorie' | upper }}<i class="fas fa-trash ml-2"></i></a></p>
+            </div>
+            <div class="col-md-6 col-lg-3">
+                <p class="text-center"><a class="a-admin" data-toggle="modal" data-target="#form-update" href="" role="button">{{'Commentaires' | upper }}<i class="fas fa-trash ml-2"></i></a></p>
+            </div>
+            <div class="col-md-6 col-lg-3">
+                <p class="text-center"><a class="a-admin" data-toggle="modal" data-target="#form-update" href="" role="button">{{'Auteur' | upper }}<i class="fas fa-trash ml-2"></i></a></p>
+            </div>
+        </div>
+
+    </div>
+</section>
+
+
+
+{{ include('includes/modals/backend/form_add.twig') }}
+
+{% endblock content %}

@@ -1,7 +1,7 @@
 {% import 'macros/form.twig' as form %}
 
-<!-- Contact Modal -->
-<div class="post-modal modal fade" id="form-contact" tabindex="-1" role="dialog" aria-labelledby="#form-contactLabel" aria-hidden="true">
+<!-- Register Modal -->
+<div class="post-modal modal fade" id="form-connexion" tabindex="-1" role="dialog" aria-labelledby="#form-connexionLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
             <button class="close" type="button" data-dismiss="modal" aria-label="Close"><span aria-hidden="true"><i class="fas fa-times"></i></span></button>
@@ -9,23 +9,23 @@
                 <div class="container">
                     <div class="row justify-content-center">
                         <div class="col-lg-8">
-                            <!-- Post Modal - Title-->
-                            <h2 class="post-modal-title text-secondary mb-0">Envoyer un message</h2>
+                            <!-- Register Modal - Title-->
+                            <h2 class="post-modal-title text-secondary mb-0">Connectez-vous</h2>
                             <!-- Icon Divider-->
                             <div class="divider-custom">
                                 <div class="divider-custom-line"></div>
                                 <div class="divider-custom-icon"><i class="fas fa-star"></i></div>
                                 <div class="divider-custom-line"></div>
                             </div>
-
-                            <form action="contact" method="#">
-                                {{ form.input('name', 'Votre nom', {require: true}) }}
-                                {{ form.input('email', 'Votre email', {type: 'email', require: true}) }}
-                                {{ form.textarea('message', 'Votre message', {require: true}) }}
-                            </form>
-                            <button type="submit" class="btn btn-primary">Envoyer<i class="fas fa-paper-plane"></i></button>
-                            <button class="btn btn-primary" href="#" data-dismiss="modal">Fermer<i class="fas fa-times fa-fw"></i></button>
                         </div>
+                    </div>
+                    <div class="justify-content-center">
+                        <form action="login" method="post">
+                            {{ form.input('pseudo', 'Votre pseudo', {require: true}) }}
+                            {{ form.input('pass', 'Votre mot de passe', {type: 'password', require: true}) }}
+                            <button type="submit" class="btn btn-primary">Se connecter<i class="fas fa-paper-plane"></i></button>
+                            <button class="btn btn-primary" href="#" data-dismiss="modal">Quitter<i class="fas fa-times fa-fw"></i></button>
+                        </form>
                     </div>
                 </div>
             </div>
