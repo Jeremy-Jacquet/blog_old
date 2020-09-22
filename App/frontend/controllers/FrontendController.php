@@ -30,10 +30,5 @@ class FrontendController extends Controller
         $categories = $this->categoryManager->getAllCategories();
     }
 
-    public function displayError()
-    {
-        header('HTTP/1.0 404 Not Found');
-        echo $this->twig->render('404.twig');
-    }
 
 }
