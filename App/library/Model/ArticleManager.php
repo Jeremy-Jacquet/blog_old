@@ -56,7 +56,7 @@ class ArticleManager extends Manager
         return $article;
     }
 
-    public function addArticle(Object $article, $imagePath)
+    public function addArticle(Article $article, $imagePath)
     {
         $req = Database::getPDO()->prepare("INSERT INTO articles (title, sentence, content, dateArticle, idAuthor, idCategory, imagePath, validate) 
                                         VALUES (:title, :sentence, :content, NOW(), :idAuthor, :idCategory, :imagePath, :validate)");

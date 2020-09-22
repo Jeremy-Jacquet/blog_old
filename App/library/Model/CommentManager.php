@@ -42,7 +42,7 @@ class CommentManager extends Manager
         return $comment;
     }
 
-    public function addComment(Object $comment)
+    public function addComment(Comment $comment)
     {
         $req = Database::getPDO()->prepare("INSERT INTO comments (content, dateComment, idUser, idArticle, validate) 
                                         VALUES (:content, NOW(), :idUser, :idArticle, :validate)");

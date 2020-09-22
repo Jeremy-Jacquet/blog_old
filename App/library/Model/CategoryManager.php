@@ -30,7 +30,7 @@ class CategoryManager extends Manager
         return $category;
     }
 
-    public function addCategory(Object $category, $imagePath)
+    public function addCategory(Category $category, $imagePath)
     {
         $req = Database::getPDO()->prepare("INSERT INTO categories (title, imagePath, validate) 
                                         VALUES (:title, :imagePath, :validate)");

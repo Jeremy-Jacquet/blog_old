@@ -31,7 +31,7 @@ class AuthorManager extends Manager
         return $author;
     }
 
-    public function addAuthor(Object $author, $imagePath)
+    public function addAuthor(Author $author, $imagePath)
     {
         $req = Database::getPDO()->prepare("INSERT INTO authors (firstname, lastname, imagePath, validate) 
                                         VALUES (:firstname, :lastname, :imagePath, :validate)");
