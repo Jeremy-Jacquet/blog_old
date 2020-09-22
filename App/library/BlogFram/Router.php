@@ -31,7 +31,13 @@ class Router
                                 $this->HTTPResponse->getAction(),
                                 $this->HTTPResponse->getId())) {
             $routeMethod = $this->getRouteByController($this->controllerName, $this->HTTPResponse->getModule());
-            $this->controller->$routeMethod($this->HTTPResponse->getAction(), $this->HTTPResponse->getId());
+            $this->controller->$routeMethod($this->HTTPResponse->getModule(), 
+                                            $this->HTTPResponse->getAction(), 
+                                            $this->HTTPResponse->getId()
+                                            );
+        } else {
+            $controller = new FrontendController;
+            $controller->redirect(HOME); 
         }
         
     }
