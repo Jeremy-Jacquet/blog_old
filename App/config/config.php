@@ -28,6 +28,9 @@ define("USER_ACCESS", 'user');
 
 define('ERROR', 'error');
 
+define("PERMITTED_CHARS", "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ");
+define("RANDOM_PATH", random_int(0, 1000).substr(str_shuffle(PERMITTED_CHARS), 0, 5));
+
 define("TARGET_DIR_BLOG", "App/backend/upload/blog/");
 define("NAME_IMAGE_BLOG", "blog");
 
