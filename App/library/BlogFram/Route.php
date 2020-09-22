@@ -22,23 +22,24 @@ trait Route
 
     public function verifyRoute($access, $module, $action, $id)
     {
+        $result = false;
         // Routes about admin (with action)
         if($access === ADMIN) {
             if(in_array($module, $this->modulesWithAction)) {
                 if($action === null) {
-                    return true;
+                    $result = true;
                 }
                 elseif($action === (ADD)){
                     if($id === null){
-                        return true;
+                        $result = true;
                     }
                 } elseif($action === (UP OR DEL)) {
                     if(($id !== null) AND is_numeric($id)) {
-                        return true;
+                        $result = true;
                     }
                 }
             } elseif($module === DASHBOARD) {
-                return true;
+                $result = true;
             }
         }
         // Routes not admin (without action)
@@ -46,12 +47,12 @@ trait Route
             if(in_array($module, $this->modulesWithAction) OR in_array($module, $this->modulesWithoutAction)) {
                 if($action === null) {
                     if(is_numeric($id) OR $id === null) {
-                        return true;
+                        $result = true;
                     }
                 }
             }
         }
-
+        return $result;
     }
 
 }
