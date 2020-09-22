@@ -24,31 +24,25 @@ trait Route
     {
         $result = false;
         // Routes about admin (with action)
-        if($access === ADMIN) {
+        if($access == ADMIN) {
             if(in_array($module, $this->modulesWithAction)) {
                 if($action === null) {
                     $result = true;
                 }
-                elseif($action === (ADD)){
-                    if($id === null){
-                        $result = true;
-                    }
-                } elseif($action === (UP OR DEL)) {
-                    if(($id !== null) AND is_numeric($id)) {
-                        $result = true;
-                    }
+                elseif($action == ADD){
+                    $result = ($id === null)? true : false;
+                } elseif($action == (UP OR DEL)) {
+                    $result = (($id !== null) AND is_numeric($id))? true : false;
                 }
-            } elseif($module === DASHBOARD) {
+            } elseif($module == DASHBOARD) {
                 $result = true;
             }
         }
-        // Routes not admin (without action)
+        // Routes not about admin (without action)
         else {
             if(in_array($module, $this->modulesWithAction) OR in_array($module, $this->modulesWithoutAction)) {
                 if($action === null) {
-                    if(is_numeric($id) OR $id === null) {
-                        $result = true;
-                    }
+                    $result = (is_numeric($id) OR $id === null)? true : false;
                 }
             }
         }
