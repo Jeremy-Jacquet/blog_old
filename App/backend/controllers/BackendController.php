@@ -3,13 +3,13 @@ namespace App\backend\controllers;
 
 use App\library\BlogFram\Controller;
 use App\library\BlogFram\Image;
-use App\library\BlogFram\Utilities;
+use App\library\BlogFram\Utility;
 use App\library\Entity\User;
 use App\library\Entity\Article;
 
 class BackendController extends Controller
 {
-    use Utilities;
+    use Utility;
     use Image;
     
     public function displayLogin($module)
