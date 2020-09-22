@@ -28,4 +28,7 @@ define("USER_ACCESS", 'user');
 
 define('ERROR', 'error');
 
+define("TARGET_DIR_BLOG", "App/backend/upload/blog/");
+define("NAME_IMAGE_BLOG", "blog");
+
 define("COOKIE_PROTECT", "timer");
