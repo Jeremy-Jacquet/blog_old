@@ -5,7 +5,7 @@ use App\library\BlogFram\Translate;
 
 trait Route
 {
-    private $modulesWithAction = [POSTS, CATEGORIES, COMMENTS, AUTHORS, USERS];
+    private $modulesWithAction = [POSTS, CATEGORIES, COMMENTS, AUTHORS, USERS, CONTACT];
     private $modulesWithoutAction = [HOME, ADMIN, LOGIN, LOGOUT, PROFILE, REGISTER];
 
     use Translate;
@@ -22,6 +22,7 @@ trait Route
 
     public function verifyRoute($access, $module, $action, $id)
     {
+        // Routes about admin (with action)
         if($access === ADMIN) {
             if(in_array($module, $this->modulesWithAction)) {
                 if($action === null) {
@@ -39,10 +40,12 @@ trait Route
             } elseif($module === DASHBOARD) {
                 return true;
             }
-        } else {
+        }
+        // Routes not admin (without action)
+        else {
             if(in_array($module, $this->modulesWithAction) OR in_array($module, $this->modulesWithoutAction)) {
                 if($action === null) {
-                    if((($id !== null) AND is_numeric($id)) OR ($id === null)) {
+                    if(is_numeric($id) OR $id === null) {
                         return true;
                     }
                 }
