@@ -25,29 +25,31 @@ trait Security
 
     public function isFormValid($module, $action = null)
     {
+        $result = false;
         if(is_null($action)) {
             if($module === LOGIN) {
-                return $this->isPOST(['pseudo', 'pass']) ? true : false;
+                $result = $this->isPOST(['pseudo', 'pass']) ? true : false;
             } elseif($module === REGISTER) {
-                return $this->isPOST(['pseudo', 'pass', 'pass2', 'email']) ? true : false;
+                $result = $this->isPOST(['pseudo', 'pass', 'pass2', 'email']) ? true : false;
             }
         } else { 
             if($action === UP OR DEL) {
-                return $this->isPOST(['id']) ? true : false;
+                $result = $this->isPOST(['id']) ? true : false;
             } else if($module === ADD) {
                 if($module === POSTS) {
-                    return $this->isPOST(['title', 'sentence', 'content', 'idCategory', 'idAuthor']) ? true : false;
+                    $result = $this->isPOST(['title', 'sentence', 'content', 'idCategory', 'idAuthor']) ? true : false;
                 } elseif($module === COMMENTS) {
-                    return $this->isPOST(['content', 'idUser', 'idArticle', 'validate']) ? true : false;
+                    $result = $this->isPOST(['content', 'idUser', 'idArticle', 'validate']) ? true : false;
                 } elseif($module === CATEGORIES) {
-                    return $this->isPOST(['title', 'validate']) ? true : false;
+                    $result = $this->isPOST(['title', 'validate']) ? true : false;
                 } elseif($module === AUTHORS) {
-                    return $this->isPOST(['firstname', 'lastname', 'validate']) ? true : false;
+                    $result = $this->isPOST(['firstname', 'lastname', 'validate']) ? true : false;
                 } elseif($module === USERS) {
-                    return $this->isPOST(['pseudo', 'pass', 'email']) ? true : false;
+                    $result = $this->isPOST(['pseudo', 'pass', 'email']) ? true : false;
                 }
             }
         }
+        return $result;
     }
 
     public function isPOST(array $array = [])

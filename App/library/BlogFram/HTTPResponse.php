@@ -12,46 +12,45 @@ class HTTPResponse
 
     public function __construct($url, $post)
     {
-        $this->setAttributes($url, $post);
+        $this->setAttributesByRoute($url);
         $this->setPost($post);
         $this->setController();
     }
     
-    public function setAttributes($url, $post)
+    public function setAttributesByRoute($url)
     {
         if(empty($url)) {
             $this->setModule(HOME);
         } else {
             if(empty($url[1])) {
                 if($url[0] === ADMIN) {
-                    $this->setAccess(ADMIN);
-                    $this->setModule(DASHBOARD);
+                    $this->setAttributes(ADMIN_ACCESS, DASHBOARD, null, null);
                 } else {
-                    $this->setModule($url[0]);
+                    $this->setAttributes(USER_ACCESS, $url[0], null, null);
                 }
             } elseif(empty($url[2])) {
                 if($url[0] === ADMIN) {
-                    $this->setAccess(ADMIN);
-                    $this->setModule($url[1]);              
+                    $this->setAttributes(ADMIN_ACCESS, $url[1], null, null);
                 } else {
-                    $this->setModule($url[0]);
-                    $this->setId($url[1]);
+                    $this->setAttributes(USER_ACCESS, $url[0], null, $url[1]);
                 }       
             } elseif(empty($url[3])) {
                 if($url[0] === ADMIN) {
-                    $this->setAccess(ADMIN);
-                    $this->setModule($url[1]);
-                    $this->setAction($url[2]);  
+                    $this->setAttributes(ADMIN_ACCESS, $url[1], $url[2], null);
                 }
             } elseif(empty($url[4])) {
                 if($url[0] === ADMIN) {
-                    $this->setAccess(ADMIN);
-                    $this->setModule($url[1]);
-                    $this->setAction($url[2]);
-                    $this->setId($url[3]); 
+                    $this->setAttributes(ADMIN_ACCESS, $url[1], $url[2], $url[3]);
                 }
             }
         }
+    }
+
+    public function setAttributes($access, $module, $action = null, $id = null) {
+        $this->setAccess($access);
+        $this->setModule($module);
+        $this->setAction($action);
+        $this->setId($id); 
     }
 
     // GETTERS
