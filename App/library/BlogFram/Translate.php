@@ -17,17 +17,19 @@ trait Translate
                         LOGOUT => 'logout',
                         REGISTER => 'register',
                         ADMIN => 'admin',
-                        DASHBOARD => 'dashboard'
+                        DASHBOARD => 'dashboard',
+                        ADD => 'add',
+                        UP => 'update',
+                        DEL => 'delete'
                         ];
 
     public function translate($data)
     {
         foreach($this->words as $word => $newWord) {
             if($data === $word) {
-                $result = $newWord;
+                return $newWord;
             }
         }
-        return $result;
     }
 
 
