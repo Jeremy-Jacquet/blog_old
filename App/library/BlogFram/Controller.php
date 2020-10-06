@@ -38,7 +38,7 @@ class Controller
         $this->redirect(HOME);
     }
 
-    protected function redirect($url, $replace = true, $statusCode = 303)
+    public function redirect($url, $replace = true, $statusCode = 303)
     {
         header('Location: ' . URL . $url, $replace, $statusCode);
         exit();
