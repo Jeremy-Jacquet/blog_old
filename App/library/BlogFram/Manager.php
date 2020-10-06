@@ -7,13 +7,13 @@ use \PDO;
 abstract class Manager
 {
 
-    public function getAll($entity, $validation = null)
+    public function getAll($from, $validation = null)
     {
         if(!empty($validation)) {
-            $req = Database::getPDO()->prepare("SELECT * FROM $entity WHERE validate = :validate");
+            $req = Database::getPDO()->prepare("SELECT * FROM $from WHERE validate = :validate");
             $req->bindValue(':validate', $validation, PDO::PARAM_INT);
         } else {
-            $req = Database::getPDO()->query("SELECT * FROM $entity");
+            $req = Database::getPDO()->query("SELECT * FROM $from");
         }
         $req->execute();
         return $req;
@@ -26,6 +26,4 @@ abstract class Manager
         $req->execute();
         return $req;
     }
-
-
 }
