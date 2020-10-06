@@ -33,11 +33,11 @@ trait Security
                 $result = $this->isPOST(['pseudo', 'pass', 'pass2', 'email']) ? true : false;
             }
         } else { 
-            if($action === UP OR DEL) {
+            if($action === UP OR $action === DEL) {
                 $result = $this->isPOST(['id']) ? true : false;
-            } else if($module === ADD) {
+            } elseif($action === ADD) {
                 if($module === POSTS) {
-                    $result = $this->isPOST(['title', 'sentence', 'content', 'idCategory', 'idAuthor']) ? true : false;
+                    $result = $this->isPOST(['title', 'sentence', 'content', 'idCategory', 'idAuthor', 'validate']) ? true : false;
                 } elseif($module === COMMENTS) {
                     $result = $this->isPOST(['content', 'idUser', 'idArticle', 'validate']) ? true : false;
                 } elseif($module === CATEGORIES) {
@@ -52,11 +52,11 @@ trait Security
         return $result;
     }
 
-    public function isPOST(array $array = [])
+    public function isPOST(array $array)
     {
         $result = 0;
-        foreach($array as $key) {
-            if(!isset($_POST[$key]) OR empty($_POST[$key])) {
+        foreach($array as $key => $value) {
+            if(!isset($_POST[$value]) OR empty($_POST[$value])) {
                 $result ++;
             }
         }

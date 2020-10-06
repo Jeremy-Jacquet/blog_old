@@ -30,14 +30,15 @@ class Router
                                 $this->HTTPResponse->getModule(),
                                 $this->HTTPResponse->getAction(),
                                 $this->HTTPResponse->getId())) {
-            $routeMethod = $this->getRouteByController($this->controllerName, $this->HTTPResponse->getModule());
-            $this->controller->$routeMethod($this->HTTPResponse->getModule(), 
+            $route = $this->getRouteByController($this->controllerName, $this->HTTPResponse->getModule(),  $this->HTTPResponse->getAction());
+            //$route = $this->getRouteByController($this->controllerName, $this->HTTPResponse->getModule());
+            $this->controller->$route($this->HTTPResponse->getModule(), 
                                             $this->HTTPResponse->getAction(), 
                                             $this->HTTPResponse->getId()
                                             );
         } else {
             $controller = new FrontendController;
-            $controller->redirect(HOME); 
+            $controller->redirect(HOME);
         }
         
     }

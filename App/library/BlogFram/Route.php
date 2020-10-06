@@ -10,10 +10,14 @@ trait Route
 
     use Translate;
 
-    public function getRouteByController($controllerName, $module)
+    public function getRouteByController($controllerName, $module, $action = null)
     {
         if($controllerName === 'backend') {
-            $route = 'displayAdmin'.ucfirst($this->translate($module));
+            if(is_null($action)) {
+                $route = 'displayAdminModule';
+            } else {
+                $route = 'displayAdmin'.ucfirst($this->translate($action));
+            }
         } elseif($controllerName === 'frontend') {
             $route = 'display'.ucfirst($this->translate($module));
         }
@@ -26,11 +30,11 @@ trait Route
         // Routes about admin (with action)
         if($access == ADMIN) {
             if(in_array($module, $this->modulesWithAction)) {
-                if($action === null) {
+                if(is_null($action)) {
                     $result = true;
                 }
                 elseif($action == ADD){
-                    $result = ($id === null)? true : false;
+                    $result = (is_null($id))? true : false;
                 } elseif($action == (UP OR DEL)) {
                     $result = (($id !== null) AND is_numeric($id))? true : false;
                 }
@@ -41,8 +45,8 @@ trait Route
         // Routes not about admin (without action)
         else {
             if(in_array($module, $this->modulesWithAction) OR in_array($module, $this->modulesWithoutAction)) {
-                if($action === null) {
-                    $result = (is_numeric($id) OR $id === null)? true : false;
+                if(is_null($action)) {
+                    $result = (is_numeric($id) OR is_null($id))? true : false;
                 }
             }
         }

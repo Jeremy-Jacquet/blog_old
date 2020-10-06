@@ -33,5 +33,4 @@ trait Utility
         return $value;
     }
 
-
 }
